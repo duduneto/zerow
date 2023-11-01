@@ -1,0 +1,16 @@
+:root {
+    --green-color: #9FDD57;
+    --primary-color: #1ED2F4;
+    --danger-color: #F521A8;
+    --dark-gray-0-color: #2B2B3A;
+    --dark-gray-1-color: #5A6B6D;
+    --gray-color: #5C777B;
+    --light-gray-0-color: #91ABAE;
+}
+
+body {
+    font-family: 'Your Desired Font', sans-serif;
+    margin: 0px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
