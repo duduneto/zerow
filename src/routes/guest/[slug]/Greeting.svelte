@@ -1,5 +1,5 @@
 <script>
-    import LiveIndicator from "../../components/LiveIndicator.svelte";
+    import LiveIndicator from "../../../components/LiveIndicator.svelte";
 </script>
 
 <header>

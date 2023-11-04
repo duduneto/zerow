@@ -1,3 +1,11 @@
+<script>
+    /**
+     * Text content of the button.
+     * @type {string}
+     */
+    export let phoneNumber;
+</script>
+
 <div class="queue-container">
     <div class="queue-wrapper">
         <div class="queue-info-box">
@@ -7,7 +15,7 @@
                     <p>mesa p/ 2 pessoas</p>
                 </div>
                 <div class="contact-info">
-                    <p>(85) 9****-5767</p>
+                    <p>{phoneNumber}</p>
                 </div>
             </div>
             <div class="position-counter">
@@ -15,14 +23,17 @@
             </div>
         </div>
         <div class="additional-info">
-            <p>Sim, se você está na posição 5, então tem 4 pessoas na sua frente 😬</p>
+            <p>
+                Sim, se você está na posição 5, então tem 4 pessoas na sua
+                frente 😬
+            </p>
         </div>
     </div>
 </div>
 
 <style>
     :root {
-        --counter-position-w: 122px
+        --counter-position-w: 122px;
     }
     h3 {
         margin: 0px;
@@ -48,7 +59,7 @@
     .queue-info-box {
         height: 126px;
         width: 100%;
-        background-color: #F4F5F6;
+        background-color: #f4f5f6;
         border-radius: 15px;
         box-shadow: 0px 3px 6px 0px #00000041;
         display: flex;
@@ -67,7 +78,7 @@
     .queue-info-box .position-counter {
         width: var(--counter-position-w);
         height: 100%;
-        background-color: #FFF;
+        background-color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -80,7 +91,7 @@
     }
 
     .contact-info p {
-        color: var(--dark-gray-1-color)
+        color: var(--dark-gray-1-color);
     }
     .additional-info {
         padding: 0.4rem 1rem 0px 1rem;
