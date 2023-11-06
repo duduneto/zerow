@@ -1,4 +1,6 @@
 import { writable } from 'svelte/store';
+import { API_URL } from '../../../services/api';
+import { fetchGuest } from '../../../services/guest';
 
 export const guestData = writable({
     loading: true,
@@ -6,24 +8,38 @@ export const guestData = writable({
     error: ""
 });
 
-const mockCall = () => new Promise((resolve) => {
-    setTimeout(() => {
-        guestData.update((state) => ({
-            ...state, data: {
-                id: "19282112984712",
-                name: "Francisco",
-                phoneNumber: "(85) 9****8567"
-            },
+export const queueData = writable({});
+/**
+ * Call To API - Get Guest Info
+ * @param {string} guestId - Guest Id as Slug
+ */
+export const connectEventSource = (guestId) => {
+    const evtSource = new EventSource(`${API_URL}/guest/events/${guestId}`);
+    evtSource.onmessage = function (event) {
+        var dataobj = JSON.parse(event.data);
+        guestData.update(state => ({
+            ...state,
+            data: {
+                ...state.data,
+                ...dataobj
+            }
         }))
-        resolve(null)
-    }, 1500)
-})
+    }
+}
 
-export const fetchGuest = async (/** @type {string} */ slug) => {
+/**
+ * Call To API - Get Guest Info
+ * @param {string} slug - Guest Id as Slug
+ */
+export const getGuest = async (slug) => {
     try {
         // @ts-ignore
         guestData.update((state) => ({ ...state, loading: true }))
-        await mockCall()
+        const response = await fetchGuest(slug);
+        guestData.update(state => ({
+            ...state,
+            data: response,
+        }))
 
     } catch (error) {
         // @ts-ignore

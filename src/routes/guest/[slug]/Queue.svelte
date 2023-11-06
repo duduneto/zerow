@@ -4,6 +4,11 @@
      * @type {string}
      */
     export let phoneNumber;
+    /**
+     * Text content of the button.
+     * @type {string}
+     */
+    export let position;
 </script>
 
 <div class="queue-container">
@@ -19,7 +24,7 @@
                 </div>
             </div>
             <div class="position-counter">
-                <h3>5</h3>
+                <h3>{position}</h3>
             </div>
         </div>
         <div class="additional-info">

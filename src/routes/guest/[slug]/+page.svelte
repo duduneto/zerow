@@ -1,20 +1,21 @@
 <script>
-    // @ts-nocheck
-    import { page } from "$app/stores";
+// @ts-nocheck
+
     /** @type {import('./$types').PageData} */
     export let data;
-    console.log(data);
+    const guestId = data.slug;
 
     import HostingDetails from "./HostingDetails.svelte";
     import Greeting from "./Greeting.svelte";
     import Queue from "./Queue.svelte";
     import ActionBox from "./ActionBox.svelte";
     import { onMount } from "svelte";
-    import { fetchGuest, guestData } from "./service";
+    import { connectEventSource, getGuest, guestData } from "./service";
     import Loading from "../../../components/Loading.svelte";
 
     onMount(() => {
-        fetchGuest(data.slug);
+        connectEventSource(guestId);
+        getGuest(guestId);
     });
 </script>
 
@@ -24,7 +25,10 @@
     {:else}
         <Greeting />
         <HostingDetails />
-        <Queue phoneNumber={$guestData.data.phoneNumber} />
+        <Queue 
+        phoneNumber={$guestData.data.phoneNumber}
+        position={$guestData.data.position}
+        />
         <ActionBox />
     {/if}
 </main>
