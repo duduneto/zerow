@@ -1,7 +1,15 @@
+<script>
+    /**
+     * Indicate if it is online.
+     * @type {boolean}
+     */
+    export let online = false;
+</script>
+
 <div class="live-indicator-container">
-    <div class="indicator-wrapper">
+    <div class="indicator-wrapper {online ? "online" : ""}">
         <div class="indicator-text-wrapper">
-            <p>na fila</p>
+            <p>{online ? "na" : "sem"} fila</p>
         </div>
         <div class="indicator-badge-wrapper">
             <div class="indicator-badge" />
@@ -13,12 +21,16 @@
     .indicator-wrapper {
         width: 90px;
         height: 24px;
-        background-color: var(--green-color);
+        background-color: var(--light-gray-1-color);
         border-radius: 40px;
-
+        
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    
+    .indicator-wrapper.online {
+        background-color: var(--green-color);
         animation: pulse 1.3s infinite;
     }
 

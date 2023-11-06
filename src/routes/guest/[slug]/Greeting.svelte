@@ -1,5 +1,10 @@
 <script>
     import LiveIndicator from "../../../components/LiveIndicator.svelte";
+    /**
+     * Indicate if it is online.
+     * @type {boolean}
+     */
+    export let online = false;
 </script>
 
 <header>
@@ -11,7 +16,7 @@
                 chegar
             </p>
         </div>
-        <LiveIndicator />
+        <LiveIndicator online={online} />
     </div>
 </header>
 

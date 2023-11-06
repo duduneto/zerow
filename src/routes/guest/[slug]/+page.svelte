@@ -10,12 +10,12 @@
     import Queue from "./Queue.svelte";
     import ActionBox from "./ActionBox.svelte";
     import { onMount } from "svelte";
-    import { connectEventSource, getGuest, guestData } from "./service";
+    import { connectEventSource, guestData } from "./service";
     import Loading from "../../../components/Loading.svelte";
 
     onMount(() => {
         connectEventSource(guestId);
-        getGuest(guestId);
+        // getGuest(guestId);
     });
 </script>
 
@@ -23,7 +23,7 @@
     {#if $guestData.loading}
         <Loading />
     {:else}
-        <Greeting />
+        <Greeting online={$guestData.online} />
         <HostingDetails />
         <Queue 
         phoneNumber={$guestData.data.phoneNumber}
