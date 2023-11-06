@@ -5,7 +5,7 @@
      * Indicate if it is online.
      * @type {boolean}
      */
-    export let open = false;
+    export let open = true;
     /**
      * Indicate toggle button text of the modal
      * @type {string}
@@ -78,6 +78,8 @@
         margin: 3rem;
         z-index: 99;
         position: relative;
+        box-shadow: 0px 0px 10px 2px #00000034;
+        border-radius: 15px;
     }
 
     .close-button {

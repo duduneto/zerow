@@ -13,12 +13,28 @@
     export let text = "";
 
     /**
+     * button's width.
+     * @type {string}
+     */
+    export let width = "";
+    /**
+     * button's max-width.
+     * @type {string}
+     */
+    export let maxWidth = "";
+
+    /**
      * Click event handler.
      */
-    const onClick = () => {};
+    export let onClick = () => {};
 </script>
 
-<button class={styleType} on:click={onClick}>
+<button 
+class={styleType} 
+on:click={onClick} 
+style="width: {width}; max-width: {maxWidth}" 
+{...$$restProps}
+>
     {#if text}{text}{:else}<slot>Default content</slot>{/if}
 </button>
 
