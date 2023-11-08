@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store';
 import { API_URL } from '../../../services/api';
-import { fetchGuest } from '../../../services/guest';
 
 export const guestData = writable({
     online: false,

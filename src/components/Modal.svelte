@@ -5,7 +5,7 @@
      * Indicate if it is online.
      * @type {boolean}
      */
-    export let open = true;
+    export let open = false;
     /**
      * Indicate toggle button text of the modal
      * @type {string}
@@ -32,7 +32,9 @@
     />
     <div class="content-container">
         <button class="close-button" on:click={() => handleModal(false)} >X</button>
-        <slot />
+        {#if open}
+             <slot />
+        {/if}
     </div>
 </div>
 

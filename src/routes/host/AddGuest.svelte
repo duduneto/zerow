@@ -3,21 +3,31 @@
 
 	import Button from "../../components/Button.svelte";
 	import Input from "../../components/Input.svelte";
+    import Loading from "../../components/Loading.svelte";
 	import Modal from "../../components/Modal.svelte";
+    import { addGuest, hostData } from "./service";
+
+	/**
+	 * @type {string}
+	 */
+	export let hostId;
 
 	/**
 	 * @param {Event & { preventDefault: () => void, target: HTMLFormElement }} event - The form submit event.
 	 */
-	function onSubmitForm(event) {
+	async function onSubmitForm(event) {
 		const formData = new FormData(event.target);
 		const formValues = {};
 
 		for (const [key, value] of formData.entries()) {
 			formValues[key] = value;
 		}
-
-		console.log("Form values:", formValues);
-
+		const payload = {
+			...formValues,
+			hostId,
+			isPriority: !!formValues.isPriority
+		}
+		await addGuest(payload);
 	}
 </script>
 
@@ -27,13 +37,16 @@
 			<Modal toggleButtonTitle="Adicionar Convidado">
 				<div class="add-guest-form-container">
 					<div class="add-guest-form-wrapper">
+						{#if $hostData.loading}
+							<Loading />
+						{/if}
 						<form class="add-guest-form" on:submit={onSubmitForm}>
 							<div class="form-content-wrapper">
 								<h2>Adicionar novo Convidado</h2>
 								<div class="input-wrapper">
 									<Input
-										id="guestName"
-										name="guestName"
+										id="name"
+										name="name"
 										label="Nome do Convidado"
 									/>
 									<Input

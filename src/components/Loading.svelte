@@ -1,5 +1,9 @@
+<script>
+    export let message = "Carregando...";
+</script>
+
 <div class="loading-container">
-    <h3>Carregando sua Fila...</h3>
+    <h3>{message}</h3>
 </div>
 
 <style>

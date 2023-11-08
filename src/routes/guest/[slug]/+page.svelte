@@ -21,7 +21,7 @@
 
 <main>
     {#if $guestData.loading}
-        <Loading />
+        <Loading message="Carregando sua Fila..." />
     {:else}
         <Greeting online={$guestData.online} />
         <HostingDetails />
