@@ -11,6 +11,10 @@
 	 * @type {string}
 	 */
 	export let hostId;
+	/**
+	 * @type {string}
+	 */
+	let openModal = false;
 
 	/**
 	 * @param {Event & { preventDefault: () => void, target: HTMLFormElement }} event - The form submit event.
@@ -28,13 +32,24 @@
 			isPriority: !!formValues.isPriority
 		}
 		await addGuest(payload);
+		handleModal(false);
+	}
+
+	function handleModal(status) {
+		console.log('new status => ', status)
+		openModal = status || !openModal
 	}
 </script>
 
 <div class="guest-actions-container">
 	<div class="guest-actions-wrapper">
 		<div class="cta-container">
-			<Modal toggleButtonTitle="Adicionar Convidado">
+			<Modal
+			isOpen={openModal}
+			onOpen={handleModal}
+			onClose={handleModal}
+			toggleButtonTitle="Adicionar Convidado"
+			>
 				<div class="add-guest-form-container">
 					<div class="add-guest-form-wrapper">
 						{#if $hostData.loading}

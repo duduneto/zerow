@@ -1,11 +1,23 @@
 <script>
+    // @ts-nocheck
+
     import Button from "./Button.svelte";
 
     /**
-     * Indicate if it is online.
+     * External Props to set open internal props
      * @type {boolean}
      */
-    export let open = false;
+    export let isOpen = false;
+    /**
+     * Function to run when open Modal.
+     * @type {() => void}
+     */
+    export let onOpen = () => {};
+    /**
+     * Function to run when closes Modal.
+     * @type {() => void}
+     */
+    export let onClose = () => {};
     /**
      * Indicate toggle button text of the modal
      * @type {string}
@@ -13,27 +25,36 @@
     export let toggleButtonTitle = "";
 
     /**
-     * @param {boolean} newState
+     * @type {import('svelte').SvelteComponent}
      */
-    function handleModal(newState) {
-        open = newState;
+    export let toggleComponent;
+
+    export let toggleComponentAttrs = {};
+
+    function handleOpen() {
+        onOpen();
+    }
+
+    function handleClose() {
+        onClose();
     }
 </script>
 
-<Button
-    text={toggleButtonTitle}
-    styleType={"primary"}
-    onClick={() => handleModal(true)}
-/>
-<div class="modal-container {open ? 'open' : 'closed'}">
-    <button
-        class="modal-outside-container"
-        on:click={() => handleModal(false)}
+{#if toggleComponent}
+    <svelte:component this={toggleComponent} {...toggleComponentAttrs} />
+{:else}
+    <Button
+        text={toggleButtonTitle}
+        styleType={"primary"}
+        onClick={handleOpen}
     />
+{/if}
+<div class="modal-container {isOpen ? 'open' : 'closed'}">
+    <button class="modal-outside-container" on:click={handleClose} />
     <div class="content-container">
-        <button class="close-button" on:click={() => handleModal(false)} >X</button>
-        {#if open}
-             <slot />
+        <button class="close-button" on:click={handleClose}>X</button>
+        {#if isOpen}
+            <slot />
         {/if}
     </div>
 </div>
@@ -66,10 +87,6 @@
 
     .modal-container.closed {
         display: none;
-    }
-
-    .content {
-        z-index: 99;
     }
 
     .content-container {
